@@ -1131,13 +1131,9 @@ class XServerAutoLogin:
             if not await self.perform_login():
                 return False
             
-            # 步骤5：检查是否需要验证
-            verification_result = await self.handle_verification_page()
-            if verification_result:
-                print("✅ 验证流程已处理")
-                await asyncio.sleep(3)  # 等待验证完成后的页面跳转
-            else:
-                print("⚠️ 验证流程未完成，可能需要手动处理")
+            # 步骤 5：【修改处】跳过验证码处理，直接检查登录结果
+            print("⏭️ 已关闭平台验证，跳过验证码获取步骤")
+            await asyncio.sleep(5) # 给页面跳转一点缓冲时间
             
             # 步骤6：检查登录结果
             if not await self.handle_login_result():
